@@ -56,6 +56,10 @@ if sys.argv[-1] == 'publish_test':
 packages = ['enterlist']
 
 requires = [
+    'gspread',
+    'oauth2client',
+    'slackbot',
+    'python-dotenv'
 ]
 
 test_requirements = [
