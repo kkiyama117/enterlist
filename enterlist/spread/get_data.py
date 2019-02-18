@@ -25,4 +25,4 @@ def get_personal_data():
 
 
 if __name__ == '__main__':
-    get_personal_data()
+    print(get_personal_data())

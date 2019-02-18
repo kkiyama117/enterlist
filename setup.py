@@ -58,7 +58,7 @@ packages = ['enterlist']
 requires = [
     'gspread',
     'oauth2client',
-    'python-dotenv', 'slackeventsapi', 'slackclient'
+    'python-dotenv', 'slackeventsapi', 'slackclient', 'flask'
 ]
 
 test_requirements = [
