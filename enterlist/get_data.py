@@ -7,7 +7,7 @@ def get_personal_data():
              'https://www.googleapis.com/auth/drive']
 
     credentials = ServiceAccountCredentials.from_json_keyfile_name(
-        '../tomiken-670c5e3660b3.json', scope)
+        '../gspread.json', scope)
     gc = gspread.authorize(credentials)
     wks = gc.open_by_key('19DsLifB7GZcA13NdroXPWpS9WtUIcgy6KcidC6wGhOY').sheet1
 
