@@ -1,4 +1,4 @@
-# settings.py
+# slackbot_settings.py
 import os
 
 from dotenv import load_dotenv, find_dotenv
