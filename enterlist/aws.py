@@ -24,7 +24,7 @@ def lambda_handler(event: dict, context) -> str:
         return "OK"
 
     # Slackにメッセージを投稿する
-    return post_message_to_channel(event.get("event").get("channel"), "Hello, Slack Bot!")
+    return post_message_to_channel(event.get("event").get("channel"), create_response(event))
 
 
 def is_bot(event: dict) -> bool:
@@ -33,6 +33,12 @@ def is_bot(event: dict) -> bool:
 
 def is_message(event: dict) -> bool:
     return event.get("event").get("type") == "message"
+
+
+def create_response(event: dict):
+    message = event.get("event").get("text")
+    user_id = event.get("event").get("user")
+    return message + user_id
 
 
 def post_message_to_channel(channel: str, message: str):

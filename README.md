@@ -13,7 +13,8 @@ practice gspread sheets
   # pip install -r requirements.txt --target .
   # zip -r ../enterlist.zip ./*
   # cd ..
-  # aws s3 cp ./enterlist.zip s3://hogehoge/enterlist.zip
+  # aws s3 cp enterlist.zip s3://hogehoge/enterlist.zip
   # aws lambda create-function --cli-input-json file://aws.json
-  
+  # or
+  # aws lambda update-function-code --cli-input-json file://aws_update.json
   ```
