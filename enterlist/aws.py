@@ -17,6 +17,7 @@ lambda_client = boto3.client('lambda')
 
 def sender_handler(event, context):
     # 処理
+    post_message_to_channel(event.get('event').get('channel'), 'Calling Success!')
     # Slackにメッセージを投稿する
     do_event(event)
     return "fin"
@@ -42,7 +43,6 @@ def caller_handler(event: dict, context) -> str:
         InvocationType="Event",
         Payload=json.dumps(event)
     )
-    post_message_to_channel(event.get('event').get('channel'), 'Calling Success!')
     return "ok"
 
 
