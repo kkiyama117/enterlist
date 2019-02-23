@@ -35,6 +35,7 @@ def caller_handler(event: dict, context) -> str:
     # 反応させないためにそのままリターンする
     if is_bot(event) or not is_message(event):
         return "not apply"
+
     post_message_to_channel(event.get('event').get('channel'), 'Running...')
     # 非同期処理のため,別関数呼び出し
     lambda_client.invoke(

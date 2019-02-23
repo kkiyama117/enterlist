@@ -35,8 +35,9 @@ def update():
     subprocess.call(args)
     args = ['aws', 'lambda', 'update-function-code', '--cli-input-json', 'file://aws_caller_update.json']
     subprocess.call(args)
+    print("finish")
 
 
 if __name__ == '__main__':
-    # update()
-    create()
+    update()
+    # create()
