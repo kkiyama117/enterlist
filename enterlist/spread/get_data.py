@@ -27,7 +27,8 @@ class GetDataManager:
         return self.create_enter(row)
 
     def get_all(self, slack_id: str):
-        data_all = self.find_enter_ids_with_mentor(self.find_mentor_name(slack_id))
+        ids_all = self.find_enter_ids_with_mentor(self.find_mentor_name(slack_id))
+        data_all = [self.create_enter(enter_id=i) for i in ids_all]
         return data_all
 
     # Utils===============================================

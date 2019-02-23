@@ -1,6 +1,3 @@
-import json
-
-
 class Enter:
     def __init__(self, enter_id: str, name: str, univ: str, department: str,
                  gender: str, interview: str, industry: str, demand: str, line: str):

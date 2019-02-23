@@ -20,7 +20,7 @@ def sender_handler(event, context):
     post_message_to_channel(event.get('event').get('channel'), 'Calling Success!')
     # Slackにメッセージを投稿する
     do_event(event)
-    return "fin"
+    return "OK"
 
 
 def caller_handler(event: dict, context) -> str:
@@ -34,7 +34,7 @@ def caller_handler(event: dict, context) -> str:
     # ボットによるイベントまたはメッセージ投稿イベント以外の場合
     # 反応させないためにそのままリターンする
     if is_bot(event) or not is_message(event):
-        return "not apply"
+        return "OK"
 
     post_message_to_channel(event.get('event').get('channel'), 'Running...')
     # 非同期処理のため,別関数呼び出し
@@ -43,7 +43,7 @@ def caller_handler(event: dict, context) -> str:
         InvocationType="Event",
         Payload=json.dumps(event)
     )
-    return "ok"
+    return "OK"
 
 
 def is_bot(event: dict) -> bool:
