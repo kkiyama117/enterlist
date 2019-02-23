@@ -4,6 +4,7 @@ import json
 import logging
 
 import requests
+from api import request
 
 # ログ設定
 logger = logging.getLogger()
@@ -14,7 +15,7 @@ def lambda_handler(event: dict, context) -> str:
     # 受け取ったイベント情報をCloud Watchログに出力
     logging.info(json.dumps(event))
 
-    # Event APIの認証
+    # Event API 認証
     if "challenge" in event:
         return event.get("challenge")
 
@@ -23,22 +24,32 @@ def lambda_handler(event: dict, context) -> str:
     if is_bot(event) or not is_message(event):
         return "OK"
 
+    # 処理
+    res = do_event(event)
     # Slackにメッセージを投稿する
-    return post_message_to_channel(event.get("event").get("channel"), create_response(event))
+    return post_message_to_channel(event.get("event").get("channel"), res)
 
 
 def is_bot(event: dict) -> bool:
+    """ Check Bot or not
+    """
     return event.get("event").get("bot_id") is not None
 
 
 def is_message(event: dict) -> bool:
+    """Check Event is created by message send or not"""
     return event.get("event").get("type") == "message"
+
+
+def do_event(event: dict):
+    res = create_response(event)
+    return res
 
 
 def create_response(event: dict):
     message = event.get("event").get("text")
     user_id = event.get("event").get("user")
-    return message + user_id
+    return request(slack_id=user_id, message=message)
 
 
 def post_message_to_channel(channel: str, message: str):
@@ -55,8 +66,8 @@ def post_message_to_channel(channel: str, message: str):
     }
     r = requests.post(url, headers=headers, data=payload)
     logging.info(r)
-    return "fin"
+    return r
 
 
 if __name__ == '__main__':
-    print(post_message_to_channel("@kkiyama117", "test"))
+    print(post_message_to_channel("@kkiyama117", request("U4L4PPWAK", "console")))
