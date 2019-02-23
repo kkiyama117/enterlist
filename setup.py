@@ -58,7 +58,6 @@ packages = ['enterlist']
 requires = [
     'gspread',
     'oauth2client',
-    'python-dotenv', 'slackeventsapi', 'slackclient', 'flask'
 ]
 
 test_requirements = [
@@ -121,7 +120,8 @@ setup(
     cmdclass={'test': PyTest},
     tests_require=test_requirements,
     extras_require={
-        'test': ['pytest', 'tox'],
+        'dev': [
+            'python-lambda-local'
+        ]
     },
-
 )

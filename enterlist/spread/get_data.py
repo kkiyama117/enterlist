@@ -2,16 +2,16 @@ import os
 from pathlib import Path
 
 import gspread
-from dotenv import find_dotenv, load_dotenv
+# from dotenv.main import find_dotenv, load_dotenv
 from oauth2client.service_account import ServiceAccountCredentials
 
 
 def get_personal_data():
-    load_dotenv(find_dotenv())
+    # load_dotenv(find_dotenv())
     scope = ['https://spreadsheets.google.com/feeds',
              'https://www.googleapis.com/auth/drive']
 
-    json_file = Path(__file__).parents[2] / 'data' / 'gspread.json'
+    json_file = Path(__file__).parent / 'gspread.json'
     credentials = ServiceAccountCredentials.from_json_keyfile_name(
         json_file, scope)
     client = gspread.authorize(credentials)

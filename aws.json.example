@@ -1,0 +1,12 @@
+{
+  "FunctionName": "enterlist",
+  "Runtime": "python3.7",
+  "Role": "role of aws lambda",
+  "Handler": "aws.lambda_handler",
+  "Code": {
+    "S3Bucket": "name of aws bucket",
+    "S3Key": "enterlist.zip"
+  },
+  "Description": "",
+  "Publish": true
+}

@@ -103,6 +103,7 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-data/tomi
 .idea/
-data/gspread.json
+enterlist/spread/gspread.json
+aws.json
+enterlist.zip
