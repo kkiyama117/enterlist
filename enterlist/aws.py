@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import concurrent.futures
 import os
 import json
 import logging
@@ -25,9 +26,11 @@ def lambda_handler(event: dict, context) -> str:
         return "not apply"
 
     # 処理
-    res = do_event(event)
-    # Slackにメッセージを投稿する
-    return post_message_to_channel(event.get("event").get("channel"), res)
+    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
+        # Slackにメッセージを投稿する
+        executor.submit(post_message_to_channel, event.get('event').get('channel'), 'Running...')
+        executor.submit(do_event, event)
+    return "fin"
 
 
 def is_bot(event: dict) -> bool:
@@ -42,8 +45,11 @@ def is_message(event: dict) -> bool:
 
 
 def do_event(event: dict):
+    # gspread からデータを作る
     res = create_response(event)
-    return res
+    # Slackにメッセージを投稿する
+    status = post_message_to_channel(event.get("event").get("channel"), res)
+    return status
 
 
 def create_response(event: dict):
