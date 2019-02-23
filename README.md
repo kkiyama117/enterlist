@@ -14,5 +14,6 @@ practice gspread sheets
   # zip -r ../enterlist.zip ./*
   # cd ..
   # aws s3 cp ./enterlist.zip s3://hogehoge/enterlist.zip
-  # aws lambda create-function --cli-imput-json file://aws.json
+  # aws lambda create-function --cli-input-json file://aws.json
+  
   ```
