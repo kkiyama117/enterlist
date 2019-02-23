@@ -6,7 +6,7 @@ def request(slack_id: str, message: str):
     gspread_manager = GetDataManager()
     command, args = parse_command(message=message, slack_id=slack_id)
     if command is not None:
-        enter_data = getattr(gspread_manager, command)(args)
+        enter_data = getattr(gspread_manager, command)(**args)
         return format_enter(enter_data)
     else:
         return "No command found!"
@@ -19,7 +19,7 @@ def parse_command(message: str, slack_id: str):
     args = None
     if main_command == 'check':
         main_command = 'get'
-        args = {'row': commands[1]}
+        args = {'row': int(commands[1])}
     elif main_command == 'check_all':
         main_command = 'get_all'
         args = {'slack_id': slack_id}

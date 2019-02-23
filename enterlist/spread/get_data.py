@@ -71,8 +71,3 @@ class GetDataManager:
 
     def find_enter_ids_with_mentor(self, mentor_name: str):
         return [self.get_enter_id(i) for i in self.find_rows_with_mentor(mentor_name)]
-
-
-if __name__ == '__main__':
-    manager = GetDataManager()
-    print(manager.get_all("U4L4PPWAK"))
