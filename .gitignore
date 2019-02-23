@@ -104,7 +104,6 @@ venv.bak/
 .mypy_cache/
 
 .idea/
-enterlist/spread/gspread.json
 aws*.json
 enterlist.zip
 !enterlist/api.py
@@ -112,5 +111,6 @@ enterlist.zip
 !enterlist/aws.py
 !enterlist/core.py
 !enterlist/requirements.txt
+enterlist/spread/gspread.json
 !enterlist/spread/*
 enterlist
