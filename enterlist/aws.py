@@ -4,6 +4,8 @@ import os
 import json
 import logging
 
+import boto3
+
 import requests
 from api import request
 
@@ -11,8 +13,17 @@ from api import request
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
+lambda_client = boto3.client('lambda')
 
-def lambda_handler(event: dict, context) -> str:
+
+def sender_handler(event, context):
+    # 処理
+    # Slackにメッセージを投稿する
+    do_event(event)
+    return "fin"
+
+
+def caller_handler(event: dict, context) -> str:
     # 受け取ったイベント情報をCloud Watchログに出力
     logging.info(json.dumps(event))
 
@@ -24,13 +35,14 @@ def lambda_handler(event: dict, context) -> str:
     # 反応させないためにそのままリターンする
     if is_bot(event) or not is_message(event):
         return "not apply"
-
-    # 処理
-    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
-        # Slackにメッセージを投稿する
-        executor.submit(post_message_to_channel, event.get('event').get('channel'), 'Running...')
-        executor.submit(do_event, event)
-    return "fin"
+    post_message_to_channel(event.get('event').get('channel'), 'Running...')
+    # 非同期処理のため,別関数呼び出し
+    lambda_client.invoke(
+        FunctionName="enterlist_sender",
+        InvocationType="Event",
+        Payload=json.dumps(event)
+    )
+    return "ok"
 
 
 def is_bot(event: dict) -> bool:
