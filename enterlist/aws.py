@@ -58,17 +58,13 @@ def is_message(event: dict) -> bool:
 
 
 def do_event(event: dict):
+    message = event.get("event").get("text")
+    user_id = event.get("event").get("user")
     # gspread からデータを作る
-    res = create_response(event)
+    res = request(slack_id=user_id, message=message)
     # Slackにメッセージを投稿する
     status = post_message_to_channel(event.get("event").get("channel"), res)
     return status
-
-
-def create_response(event: dict):
-    message = event.get("event").get("text")
-    user_id = event.get("event").get("user")
-    return request(slack_id=user_id, message=message)
 
 
 def post_message_to_channel(channel: str, message: str):
@@ -89,4 +85,4 @@ def post_message_to_channel(channel: str, message: str):
 
 
 if __name__ == '__main__':
-    print(post_message_to_channel("@kkiyama117", request("U4L4PPWAK", "console")))
+    print(post_message_to_channel("@kkiyama117", request("U4L4PPWAK", "check 4")))

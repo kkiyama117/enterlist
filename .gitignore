@@ -109,5 +109,5 @@ aws*.json
 enterlist.zip
 enterlist/six.py
 !enterlist/*.py
-!enterlist/spread
+!enterlist/spread/*
 enterlist/*
