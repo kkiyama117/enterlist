@@ -7,6 +7,10 @@
     "S3Bucket": "name of aws bucket",
     "S3Key": "enterlist.zip"
   },
+    "Variables": {
+    "SLACK_BOT_TOKEN": "xoxb-5156298021-553600720596-8FKuS8hfSVTHYFswTgXQUC2U",
+    "GSPREAD_SHEET": "1z8xsa9Zc2KbM1lTK26-lBsvAKomtltQkKFU3hB3X0cc"
+  },
   "Description": "",
   "Publish": true
 }
