@@ -22,7 +22,7 @@ def lambda_handler(event: dict, context) -> str:
     # ボットによるイベントまたはメッセージ投稿イベント以外の場合
     # 反応させないためにそのままリターンする
     if is_bot(event) or not is_message(event):
-        return "OK"
+        return "not apply"
 
     # 処理
     res = do_event(event)
@@ -66,7 +66,7 @@ def post_message_to_channel(channel: str, message: str):
     }
     r = requests.post(url, headers=headers, data=payload)
     logging.info(r)
-    return r
+    return "OK"
 
 
 if __name__ == '__main__':
