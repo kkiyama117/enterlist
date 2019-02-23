@@ -1,0 +1,6 @@
+{
+  "FunctionName": "enterlist",
+  "S3Bucket": "hogehoge",
+  "S3Key": "enterlist.zip",
+  "Publish": true
+}
