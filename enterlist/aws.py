@@ -50,3 +50,7 @@ def post_message_to_channel(channel: str, message: str):
     r = requests.post(url, headers=headers, data=payload)
     logging.info(r)
     return "fin"
+
+
+if __name__ == '__main__':
+    print(post_message_to_channel("@kkiyama117", "test"))
