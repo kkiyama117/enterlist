@@ -1,15 +1,16 @@
 {
-  "FunctionName": "enterlist",
+  "FunctionName": "enterlist_caller(or enterlist_sender)",
   "Runtime": "python3.7",
   "Role": "role of aws lambda",
-  "Handler": "aws.lambda_handler",
+  "Handler": "aws.caller_handler",
+  "Handler": "aws.sender_handler",
   "Code": {
     "S3Bucket": "name of aws bucket",
     "S3Key": "enterlist.zip"
   },
     "Variables": {
-    "SLACK_BOT_TOKEN": "xoxb-5156298021-553600720596-8FKuS8hfSVTHYFswTgXQUC2U",
-    "GSPREAD_SHEET": "1z8xsa9Zc2KbM1lTK26-lBsvAKomtltQkKFU3hB3X0cc"
+    "SLACK_BOT_TOKEN": "hogehoge",
+    "GSPREAD_SHEET": "fugafuga"
   },
   "Description": "",
   "Publish": true

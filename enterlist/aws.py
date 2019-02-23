@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
-import concurrent.futures
 import os
 import json
 import logging
 
 import boto3
-
 import requests
+
 from api import request
 
 # ログ設定
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
-
+# client for call lambda
 lambda_client = boto3.client('lambda')
 
 
@@ -43,6 +42,7 @@ def caller_handler(event: dict, context) -> str:
         InvocationType="Event",
         Payload=json.dumps(event)
     )
+    post_message_to_channel(event.get('event').get('channel'), 'Calling Success!')
     return "ok"
 
 
