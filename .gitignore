@@ -107,7 +107,10 @@ venv.bak/
 enterlist/spread/gspread.json
 aws*.json
 enterlist.zip
-enterlist/six.py
-!enterlist/*.py
+!enterlist/api.py
+!enterlist/__version__.py
+!enterlist/aws.py
+!enterlist/core.py
+!enterlist/requirements.txt
 !enterlist/spread/*
-enterlist/*
+enterlist
