@@ -27,8 +27,9 @@ class GetDataManager:
         return self.create_enter(row)
 
     def get_all(self, slack_id: str):
-        ids_all = self.find_enter_ids_with_mentor(self.find_mentor_name(slack_id))
-        data_all = [self.create_enter(enter_id=i) for i in ids_all]
+        enter_ids_all = self.find_enter_ids_with_mentor(self.find_mentor_name(slack_id))
+        print(enter_ids_all)
+        data_all = [self.create_enter(enter_id=i) for i in enter_ids_all]
         return data_all
 
     # Utils===============================================
@@ -49,7 +50,7 @@ class GetDataManager:
 
         # enterlist sheets
         keys_data = {'name': '氏名', 'univ': '大学', 'department': '学部学科', 'gender': '性別'}
-        needed_dict = {k: self.enterlist.cell(row, self.enterlist.find(v).col).value for k, v in keys_data.items()}
+        needed_dict = {k: self.enterlist.cell(_row, self.enterlist.find(v).col).value for k, v in keys_data.items()}
         _row = self.interview.find(_enter_id).row
         # 面談CSV
         keys_data = {'interview': 'AD' + str(_row), 'demand': 'AG' + str(_row), 'line': 'AH' + str(_row)}
