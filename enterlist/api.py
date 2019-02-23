@@ -4,7 +4,7 @@ from spread.models import format_enter
 
 def request(slack_id: str, message: str):
     gspread_manager = GetDataManager()
-    command, args = parse_command(message, slack_id)
+    command, args = parse_command(message=message, slack_id=slack_id)
     if command is not None:
         enter_data = getattr(gspread_manager, command)(args)
         return format_enter(enter_data)

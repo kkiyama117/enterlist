@@ -60,6 +60,7 @@ def is_message(event: dict) -> bool:
 def do_event(event: dict):
     message = event.get("event").get("text")
     user_id = event.get("event").get("user")
+    post_message_to_channel(event.get('event').get('channel'), message + ' ' + user_id + ' Searching')
     # gspread からデータを作る
     res = request(slack_id=user_id, message=message)
     # Slackにメッセージを投稿する
