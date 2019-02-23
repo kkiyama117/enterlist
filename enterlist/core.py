@@ -11,7 +11,7 @@ def deploy():
     cd = Path(__file__).parent
     os.chdir(cd)
     print(cd)
-    args = ['pip', 'install', '-U', '-r', cd.as_posix() + '/requirements.txt', '--target', 'enterlist']
+    args = ['pip', 'install', '-U', '-r', cd.as_posix() + '/requirements.txt', '--target', '.']
     subprocess.call(args)
     pack = Path(shutil.make_archive((cd.parent / 'enterlist').as_posix(), 'zip'))
     os.chdir(cd.parent)
