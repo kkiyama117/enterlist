@@ -105,5 +105,9 @@ venv.bak/
 
 .idea/
 enterlist/spread/gspread.json
-aws.json
+aws*.json
 enterlist.zip
+enterlist/six.py
+!enterlist/*.py
+!enterlist/spread
+enterlist/*
