@@ -3,6 +3,12 @@ from spread.models import format_enter
 
 
 def request(slack_id: str, message: str) -> (str, str):
+    """ 送られてきた文字列からコマンドをパースして適切な関数に処理を投げる
+
+    :param slack_id:
+    :param message:
+    :return:
+    """
     gspread_manager = GetDataManager()
     command, args = parse_command(message=message, slack_id=slack_id)
     if command is not None:

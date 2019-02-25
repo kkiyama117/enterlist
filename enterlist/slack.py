@@ -1,7 +1,6 @@
 import os
-from logging import __init__
 
-from requests import __init__
+import requests
 
 
 def post_message_to_channel(channel: str, message: str):
@@ -17,5 +16,4 @@ def post_message_to_channel(channel: str, message: str):
         'as_user': True
     }
     r = requests.post(url, headers=headers, data=payload)
-    logging.info(r)
     return "OK"
