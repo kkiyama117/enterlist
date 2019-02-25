@@ -15,29 +15,42 @@ def deploy():
     subprocess.call(args)
     pack = Path(shutil.make_archive((cd.parent / 'enterlist').as_posix(), 'zip'))
     os.chdir(cd.parent)
-    args = ['aws', 's3', 'cp', pack.name, 's3://' + os.getenv('S3_BUCKET') + '/' + pack.name]
+    username = os.getenv('USERNAME', '')
+    args = ['aws', 's3', 'cp', pack.name, 's3://' + os.getenv('S3_BUCKET') + '/' + pack.name, '--profile', username]
     subprocess.call(args)
     return cd.parent
 
 
 def create():
+    username = os.getenv('USERNAME', '')
     os.chdir(deploy())
-    args = ['aws', 'lambda', 'create-function', '--cli-input-json', 'file://aws_caller.json']
+    args = ['aws', 'lambda', 'create-function', '--cli-input-json', 'file://aws_caller_' + username + '.json',
+            '--profile', username]
     subprocess.call(args)
-    args = ['aws', 'lambda', 'create-function', '--cli-input-json', 'file://aws_sender.json']
+    args = ['aws', 'lambda', 'create-function', '--cli-input-json', 'file://aws_sender_' + username + '.json',
+            '--profile', username]
     subprocess.call(args)
     print("finish")
 
 
 def update():
+    username = os.getenv('USERNAME', '')
     os.chdir(deploy())
-    args = ['aws', 'lambda', 'update-function-code', '--cli-input-json', 'file://aws_sender_update.json']
+    args = ['aws', 'lambda', 'update-function-code', '--cli-input-json',
+            'file://aws_caller_update_' + username + '.json', '--profile',
+            username]
     subprocess.call(args)
-    args = ['aws', 'lambda', 'update-function-code', '--cli-input-json', 'file://aws_caller_update.json']
+    args = ['aws', 'lambda', 'update-function-code', '--cli-input-json',
+            'file://aws_sender_update_' + username + '.json', '--profile',
+            username]
     subprocess.call(args)
     print("finish")
 
 
-if __name__ == '__main__':
-    update()
+def main():
     # create()
+    update()
+
+
+if __name__ == '__main__':
+    main()

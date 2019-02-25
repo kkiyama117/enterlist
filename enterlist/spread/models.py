@@ -22,15 +22,3 @@ class Enter:
             f'メンターへの希望: {self.demand} \n' \
             f'LINE ID: {self.line}'
         return text
-
-
-def format_enter(enter):
-    if type(enter) is Enter:
-        text = enter.detail()
-        text = 'エンターをチェックしました\n' + text
-    elif type(enter) is list:
-        text = ""
-        for _enter in enter:
-            text += _enter.detail()
-        text = f'{len(enter)}人分のエンターをチェックしました\n' + text
-    return text

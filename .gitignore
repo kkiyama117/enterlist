@@ -111,7 +111,7 @@ enterlist.zip
 !enterlist/aws.py
 !enterlist/core.py
 !enterlist/deploy.py
-!enterlist/slack.py
+!enterlist/utils.py
 !enterlist/requirements.txt
 enterlist/spread/gspread.json
 !enterlist/spread/*

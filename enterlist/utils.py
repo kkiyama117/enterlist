@@ -15,5 +15,5 @@ def post_message_to_channel(channel: str, message: str):
         'text': message,
         'as_user': True
     }
-    r = requests.post(url, headers=headers, data=payload)
+    requests.post(url, headers=headers, data=payload)
     return "OK"

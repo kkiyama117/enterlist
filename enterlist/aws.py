@@ -4,11 +4,9 @@ import logging
 
 import boto3
 
-from api import request
-
 # ログ設定
-from core import do_event
-from slack import post_message_to_channel
+from core import run
+from utils import post_message_to_channel
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -17,14 +15,33 @@ lambda_client = boto3.client('lambda')
 
 
 def sender_handler(event, context):
+    """ AWS Sender command
+
+    Args:
+        event:
+        context:
+
+    Returns:
+
+    """
+    # 受け取ったイベント情報をCloud Watchログに出力
+    logging.info(json.dumps(event))
     # 処理
     post_message_to_channel(event.get('event').get('channel'), 'Calling Success!')
     # Slackにメッセージを投稿する
-    do_event(event)
+    run(event)
     return "OK"
 
 
 def caller_handler(event: dict, context) -> str:
+    """ AWS Sender command
+
+    Args:
+        event:
+        context:
+
+    Returns:
+    """
     # 受け取ったイベント情報をCloud Watchログに出力
     logging.info(json.dumps(event))
 
@@ -38,7 +55,7 @@ def caller_handler(event: dict, context) -> str:
         return "OK"
 
     post_message_to_channel(event.get('event').get('channel'), 'Running...')
-    # 非同期処理のため,別関数呼び出し
+    # 非同期処理のため,別関数(Sender)呼び出し
     lambda_client.invoke(
         FunctionName="enterlist_sender",
         InvocationType="Event",
@@ -56,8 +73,3 @@ def is_bot(event: dict) -> bool:
 def is_message(event: dict) -> bool:
     """Check Event is created by message send or not"""
     return event.get("event").get("type") == "message"
-
-
-if __name__ == '__main__':
-    _id, res = request("U4L4PPWAK", "check 4")
-    print(post_message_to_channel(_id, res))
