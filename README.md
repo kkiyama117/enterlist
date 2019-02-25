@@ -1,13 +1,16 @@
 # enterlist
 practice gspread sheets
 
-# deploy 
+# deploy() 
 1. First, create venv env
 2. Download file for pip
 3. Zip dir of library
 4. Upload zip file to S3
 5. Make function
 
+  ```python
+    
+  ```
   ```bash
   # cd enterlist
   # pip install -r requirements.txt --target .

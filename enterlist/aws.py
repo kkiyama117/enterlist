@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-import os
 import json
 import logging
 
 import boto3
-import requests
 
 from api import request
 
 # ログ設定
+from slack import post_message_to_channel
+
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 # client for call lambda
@@ -59,31 +59,15 @@ def is_message(event: dict) -> bool:
 
 def do_event(event: dict):
     message = event.get("event").get("text")
-    user_id = event.get("event").get("user")
-    post_message_to_channel(event.get('event').get('channel'), message + ' ' + user_id + ' Searching')
+    commander_id = event.get("event").get("user")
+    post_message_to_channel(event.get('event').get('channel'), message + ' ' + commander_id + ' Searching')
     # gspread からデータを作る
-    res = request(slack_id=user_id, message=message)
+    user_id, res = request(slack_id=commander_id, message=message)
     # Slackにメッセージを投稿する
-    status = post_message_to_channel(event.get("event").get("channel"), res)
+    status = post_message_to_channel(user_id, res)
     return status
 
 
-def post_message_to_channel(channel: str, message: str):
-    # load_dotenv(find_dotenv())
-    url = "https://slack.com/api/chat.postMessage"
-    token = os.getenv('SLACK_BOT_TOKEN')
-    headers = {
-        "Authorization": "Bearer " + token
-    }
-    payload = {
-        'channel': channel,
-        'text': message,
-        'as_user': True
-    }
-    r = requests.post(url, headers=headers, data=payload)
-    logging.info(r)
-    return "OK"
-
-
 if __name__ == '__main__':
-    print(post_message_to_channel("@kkiyama117", request("U4L4PPWAK", "check 4")))
+    _id, res = request("U4L4PPWAK", "check 4")
+    print(post_message_to_channel(_id, res))

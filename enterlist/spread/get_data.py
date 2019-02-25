@@ -33,9 +33,23 @@ class GetDataManager:
         return data_all
 
     # Utils===============================================
-    def find_mentor_name(self, member_id: str) -> str:
-        mentor_cell = self.mentor.find(member_id)
+    def find_mentor_name(self, slack_id: str) -> str:
+        """ Get name from Slack ID
+
+        :param slack_id:
+        :return:
+        """
+        mentor_cell = self.mentor.find(slack_id)
         return self.mentor.cell(mentor_cell.row, 1).value
+
+    def find_slack_id(self, name) -> str:
+        """ Get Slack id from name
+
+        :param name:
+        :return:
+        """
+        mentor_cell = self.mentor.find(name)
+        return self.mentor.cell(mentor_cell.row, 2).value
 
     def create_enter(self, row: int = None, enter_id=None):
         # initialize
@@ -64,7 +78,8 @@ class GetDataManager:
 
     # for check one row===================================
     def get_enter_id(self, row: int):
-        return self.enterlist.cell(row, 1).value
+        _col = self.enterlist.find('エンターID')
+        return self.enterlist.cell(row, _col).value
 
     # for check all===================================
     def find_rows_with_mentor(self, mentor_name: str):

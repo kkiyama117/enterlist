@@ -2,14 +2,14 @@ from spread.get_data import GetDataManager
 from spread.models import format_enter
 
 
-def request(slack_id: str, message: str):
+def request(slack_id: str, message: str) -> (str, str):
     gspread_manager = GetDataManager()
     command, args = parse_command(message=message, slack_id=slack_id)
     if command is not None:
         enter_data = getattr(gspread_manager, command)(**args)
-        return format_enter(enter_data)
+        return slack_id, format_enter(enter_data)
     else:
-        return "No command found!"
+        return slack_id, "No command found!"
 
 
 def parse_command(message: str, slack_id: str):
