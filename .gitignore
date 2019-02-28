@@ -112,7 +112,8 @@ enterlist.zip
 !enterlist/core.py
 !enterlist/deploy.py
 !enterlist/utils.py
+!enterlist/models.py
 !enterlist/requirements.txt
-enterlist/spread/gspread.json
-!enterlist/spread/*
+enterlist/gspread.json
+!enterlist/spread.py
 enterlist

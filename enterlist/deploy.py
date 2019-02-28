@@ -24,10 +24,10 @@ def deploy():
 def create():
     username = os.getenv('USERNAME', '')
     os.chdir(deploy())
-    args = ['aws', 'lambda', 'create-function', '--cli-input-json', 'file://aws_caller_' + username + '.json',
+    args = ['aws', 'lambda', 'create-function', '--cli-input-json', 'file://settings/aws_caller_' + username + '.json',
             '--profile', username]
     subprocess.call(args)
-    args = ['aws', 'lambda', 'create-function', '--cli-input-json', 'file://aws_sender_' + username + '.json',
+    args = ['aws', 'lambda', 'create-function', '--cli-input-json', 'file://settings/aws_sender_' + username + '.json',
             '--profile', username]
     subprocess.call(args)
     print("finish")
@@ -37,11 +37,11 @@ def update():
     username = os.getenv('USERNAME', '')
     os.chdir(deploy())
     args = ['aws', 'lambda', 'update-function-code', '--cli-input-json',
-            'file://aws_caller_update_' + username + '.json', '--profile',
+            'file://settings/aws_caller_update_' + username + '.json', '--profile',
             username]
     subprocess.call(args)
     args = ['aws', 'lambda', 'update-function-code', '--cli-input-json',
-            'file://aws_sender_update_' + username + '.json', '--profile',
+            'file://settings/aws_sender_update_' + username + '.json', '--profile',
             username]
     subprocess.call(args)
     print("finish")

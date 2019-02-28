@@ -5,7 +5,7 @@ import logging
 import boto3
 
 # ログ設定
-from core import run
+from api import request
 from utils import post_message_to_channel
 
 logger = logging.getLogger()
@@ -27,10 +27,9 @@ def sender_handler(event, context):
     # 受け取ったイベント情報をCloud Watchログに出力
     logging.info(json.dumps(event))
     # 処理
-    post_message_to_channel(event.get('event').get('channel'), 'Calling Success!')
+    post_message_to_channel(event.get('event').get('channel'), ' Calling Success!')
     # Slackにメッセージを投稿する
-    run(event)
-    return "OK"
+    return request(event)
 
 
 def caller_handler(event: dict, context) -> str:
