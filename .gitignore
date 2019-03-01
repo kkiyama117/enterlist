@@ -114,6 +114,6 @@ enterlist.zip
 !enterlist/utils.py
 !enterlist/models.py
 !enterlist/requirements.txt
-enterlist/gspread.json
+enterlist/kiyama.json
 !enterlist/spread.py
 enterlist

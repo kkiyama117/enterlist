@@ -13,7 +13,7 @@ scope = ['https://spreadsheets.google.com/feeds',
 
 class GetDataManager:
     def __init__(self):
-        _json_file = Path(__file__).parent / 'gspread.json'
+        _json_file = Path(__file__).parent / 'kiyama.json'
         _credentials = ServiceAccountCredentials.from_json_keyfile_name(_json_file, scope)
         client = gspread.authorize(_credentials)
         _file_id = os.getenv('GSPREAD_SHEET')
